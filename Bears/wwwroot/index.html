@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <script src="jquery/jquery.js" type="text/javascript"></script>
+    <script src="lib/ag-grid/ag-grid-community.min.js" type="text/javascript"></script>
+    <script src="lib/twitter-bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="scripts/init.js" type="text/javascript"></script>
+    <script src="scripts/create.js" type="text/javascript"></script>
+    <script src="scripts/delete.js" type="text/javascript"></script>
+    <script src="scripts/grid.js" type="text/javascript"></script>
+    <script src="scripts/save.js" type="text/javascript"></script>
+    <script src="scripts/modal.js" type="text/javascript"></script>
+    <script src="scripts/main.js" type="text/javascript"></script>
+    <link href="lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="lib/ag-grid/styles/ag-grid.min.css" rel="stylesheet">
+
+    <title>Bear Management Application - 2020 Copyright :)</title>
+</head>
+<body style="margin: 30px; overflow-y: scroll">
+<div class="row card">
+    <div class="card-header text-center">
+        <h2>Bear Management Application - 2020 Copyright :)</h2>
+    </div>
+    <div class="col-md-12 card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="bearsGrid" style="height: 100%; min-height: 300px" class="ag-theme-alpine"></div>
+            </div>
+            <div class="col-md-4">
+                <form id="details">
+                    <div id="bearDetails" class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" pattern=".{5,256}" required />
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter valid name (5-256 characters)!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="bearType">Type</label>
+                                <select class="form-control" id="bearType"> </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Gender: </label>
+                                <div class="form-row">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender1" value="1">
+                                        <label class="form-check-label" for="gender1">M</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender2" value="2">
+                                        <label class="form-check-label" for="gender2">F</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" id="age" min="1" max="100" required="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="saveButton"></label>
+                        <div class="form-row">
+                            <div class="form-check form-check-inline">
+                                <button id="saveButton" type="button" class="btn btn-primary">Save</button>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <button id="createButton" type="button" class="btn btn-danger">Create</button>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <small id="statusText" for="saveButton" class="form-text text-success" style="display: none;">&nbsp;</small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <br/>
+        <div class="row" style="width: 100%;">
+            <div class="col-md-3">
+                <img src="" class="rounded img-thumbnail " alt="bear" id="bearImage"/>
+            </div>
+            <div class="col-md-9" id="bearDescription"></div>
+
+        </div>
+
+    </div>
+</div>
+<div id="modalDialog" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalDialogHeader" class="modal-title">Delete Bear</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form id="modalBodyPlaceHolder" class="modal-body">
+                <p id="modalDialogMessage" >Modal body text goes here.</p>
+            </form>
+            <div class="modal-footer">
+                <button id="modalDialogYesButton" type="button" class="btn btn-danger">Delete</button>
+                <button id="modalDialogNoButton" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
