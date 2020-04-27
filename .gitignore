@@ -1,1 +1,13 @@
 /Bears/*.user
+/Bears/wwwroot/jquery
+/Bears/wwwroot/lib
+/Bears/obj
+/Bears/bin
+/Bears/logs
+/.vs
+/Contracts/obj
+/Contracts/bin
+/Entities/obj
+/Entities/bin
+/Repository/obj
+/Repository/bin

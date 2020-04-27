@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -11,6 +12,13 @@ namespace Bears
 {
 	public class Startup
 	{
+		private readonly IConfiguration _configuration;
+
+		public Startup(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddSwaggerGen(c =>
@@ -18,14 +26,9 @@ namespace Bears
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bears API", Version = "v1" });
 			});
 
-			services.AddControllers();
 
-			var connectionSettings = new ConnectionSettings
-			{
-				ConnectionString = "Data Source=.;Initial Catalog=Bears;Integrated Security=SSPI;Application Name=TReMBIServices;",
-				CommandTimeout = 120
-			};
-
+			var connectionSettings = _configuration.GetSection("DatabaseSettings").Get<ConnectionSettings>();
+		
 			services.AddSingleton<IBearTypeRepository>(new BearTypeRepository(new ReadOnlyRepoConfig{ConnectionSettings = connectionSettings, SpToGetAll = "BearType_SelectAll", SpToGetByKey = "BearType_Select", SpKeyParamName = "bearTypeId"}));
 			services.AddSingleton<IGenderRepository>(new GenderRepository(new ReadOnlyRepoConfig { ConnectionSettings = connectionSettings, SpToGetAll = "Gender_SelectAll", SpToGetByKey = "Gender_Select", SpKeyParamName = "genderId"}));
 			services.AddSingleton<IBearRepository>(
@@ -41,6 +44,7 @@ namespace Bears
 						SpToDelete = "Bear_Delete"
 					}));
 
+			services.AddControllers();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
