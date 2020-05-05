@@ -98,44 +98,5 @@ namespace Repository.Db
 
 			return (T_ReturnValue)result;
 		}
-
-		//public virtual IEnumerable<T_Value> GetAll()
-		//{
-		//	return FetchData(_repoConfig.SpToGetAll, null);
-		//}
-
-
-		//public virtual T_Value GetByKey(T_Key key)
-		//{
-		//	return FetchData(_repoConfig.SpToGetByKey, new []{new SqlParameter(_repoConfig.SpKeyParamName, key)}).FirstOrDefault();
-		//}
-
-
-		//private IEnumerable<T_Value> FetchData(string spName, SqlParameter[] sqlParams)
-		//{
-		//	IEnumerable<T_Value> result;
-
-		//	using (var con = new SqlConnection(_repoConfig.ConnectionString))
-		//	{
-		//		con.Open();
-
-		//		using (var cmd = new SqlCommand { Connection = con, CommandType = CommandType.StoredProcedure, CommandText = spName, CommandTimeout = _repoConfig.CommandTimeout })
-		//		{
-		//			if (sqlParams != null)
-		//			{
-		//				cmd.Parameters.AddRange(sqlParams);
-		//			}
-
-		//			using (var rdr = cmd.ExecuteReader())
-		//			{
-		//				result = rdr.HasRows
-		//					? (IEnumerable<T_Value>)_mapper.Map<IDataReader, IEnumerable<T_Value>>(rdr).ToList()
-		//					: new T_Value[] { };
-		//			}
-		//		}
-		//	}
-
-		//	return result;
-		//}
 	}
 }

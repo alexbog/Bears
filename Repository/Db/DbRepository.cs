@@ -18,67 +18,6 @@ namespace Repository.Db
 		protected DbRepository(T_RepoConfig repoConfig): base(repoConfig)
 		{
 		}
-		
-
-		//private T_ReturnValue ProcessRequest<T_ReturnValue>(string spName, SqlParameter[] sqlParams, ResultType resultType)
-		//{
-		//	object result;
-
-		//	using (var con = new SqlConnection(_repoConfig.ConnectionString))
-		//	{
-		//		con.Open();
-
-		//		using (var cmd = new SqlCommand
-		//		{
-		//			Connection = con, 
-		//			CommandType = CommandType.StoredProcedure, 
-		//			CommandText = spName, 
-		//			CommandTimeout = _repoConfig.CommandTimeout
-		//		})
-		//		{
-		//			if (sqlParams != null)
-		//			{
-		//				cmd.Parameters.AddRange(sqlParams);
-		//			}
-
-		//			if (resultType == ResultType.ReturnValue)
-		//			{
-		//				var returnParameter = new SqlParameter()
-		//				{
-		//					ParameterName = "@ReturnVal",
-		//					Direction = ParameterDirection.ReturnValue
-		//				};
-		//				cmd.Parameters.Add(returnParameter);
-		//			}
-
-		//			if (resultType == ResultType.ResultSet)
-		//			{
-		//				using (var rdr = cmd.ExecuteReader())
-		//				{
-		//					result = rdr.HasRows
-		//						? (IEnumerable<T_Value>) _mapper.Map<IDataReader, IEnumerable<T_Value>>(rdr).ToList()
-		//						: new T_Value[] { };
-		//				}
-		//			}
-
-		//			else
-		//			{
-		//				cmd.ExecuteNonQuery();
-
-		//				if (resultType == ResultType.ReturnValue)
-		//				{
-		//					result = cmd.Parameters["@ReturnVal"];
-		//				}
-		//				else
-		//				{
-		//					result = new T_Value[] { };
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	return (T_ReturnValue) result;
-		//}
 
 		public T_Value Create(T_Value value)
 		{
@@ -100,18 +39,6 @@ namespace Repository.Db
 			ProcessRequest<IEnumerable<T_Value>>(_repoConfig.SpToDelete, parameters, ResultType.NoResult);
 		}
 
-		//public override IEnumerable<T_Value> GetAll()
-		//{
-		//	return ProcessRequest<IEnumerable<T_Value>>(_repoConfig.SpToGetAll, null, ResultType.ResultSet);
-		//}
-
-
-		//public override T_Value GetByKey(T_Key key)
-		//{
-		//	var parameters = new[] { new SqlParameter(_repoConfig.SpKeyParamName, key) };
-		//	return ProcessRequest<IEnumerable<T_Value>>(_repoConfig.SpToGetByKey, parameters, ResultType.ResultSet).FirstOrDefault();
-		//}
-
-		abstract protected SqlParameter[] getParameters(T_Value value, bool includeKey);
+		protected abstract SqlParameter[] getParameters(T_Value value, bool includeKey);
 	}
 }
